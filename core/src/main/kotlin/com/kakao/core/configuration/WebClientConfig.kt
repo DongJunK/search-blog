@@ -3,6 +3,8 @@ package com.kakao.core.configuration
 
 import com.kakao.core.configuration.properties.KakaoProperties
 import com.kakao.core.configuration.properties.NaverProperties
+import com.kakao.core.constant.KakaoConstants
+import com.kakao.core.constant.NaverConstants
 import io.netty.channel.ChannelOption
 import io.netty.handler.timeout.ReadTimeoutHandler
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
@@ -23,7 +25,7 @@ class WebClientConfig(
     private val naverProperties: NaverProperties,
 ) {
 
-    fun defaultWebClient(): WebClient{
+    fun defaultWebClient(): WebClient {
         val httpClient = HttpClient.create(ConnectionProvider.newConnection())
             .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10 * 1000)
             .responseTimeout(Duration.ofSeconds(60))
@@ -36,9 +38,11 @@ class WebClientConfig(
             .clientConnector(ReactorClientHttpConnector(httpClient))
             .build()
     }
+
     @Bean
     fun kakaoWebClient(): WebClient {
         return defaultWebClient().mutate()
+            .baseUrl(KakaoConstants.BASE_URL)
             .defaultHeader(AUTHORIZATION, "KakaoAK ${kakaoProperties.restApiKey}")
             .build()
     }
@@ -46,12 +50,9 @@ class WebClientConfig(
     @Bean
     fun naverWebClient(): WebClient {
         return kakaoWebClient().mutate()
-            .defaultHeader(X_NAVER_CLIENT_ID, naverProperties.clientId)
-            .defaultHeader(X_NAVER_CLIENT_SECRET, naverProperties.clientSecret)
+            .baseUrl(NaverConstants.BASE_URL)
+            .defaultHeader(NaverConstants.X_NAVER_CLIENT_ID, naverProperties.clientId)
+            .defaultHeader(NaverConstants.X_NAVER_CLIENT_SECRET, naverProperties.clientSecret)
             .build()
-    }
-    companion object{
-        const val X_NAVER_CLIENT_ID = "X-Naver-Client-Id"
-        const val X_NAVER_CLIENT_SECRET = "X-Naver-Client-Secret"
     }
 }
