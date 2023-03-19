@@ -38,7 +38,6 @@ class WebClientConfig(
     }
     @Bean
     fun kakaoWebClient(): WebClient {
-        println(kakaoProperties.restApiKey)
         return defaultWebClient().mutate()
             .defaultHeader(AUTHORIZATION, "KakaoAK ${kakaoProperties.restApiKey}")
             .build()
@@ -46,9 +45,6 @@ class WebClientConfig(
 
     @Bean
     fun naverWebClient(): WebClient {
-        println(naverProperties.clientId)
-        println(naverProperties.clientSecret)
-
         return kakaoWebClient().mutate()
             .defaultHeader(X_NAVER_CLIENT_ID, naverProperties.clientId)
             .defaultHeader(X_NAVER_CLIENT_SECRET, naverProperties.clientSecret)
