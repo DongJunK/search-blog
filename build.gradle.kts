@@ -24,7 +24,6 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
         implementation("org.springframework.boot:spring-boot-devtools")
-        runtimeOnly("com.h2database:h2")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.projectreactor:reactor-test")
     }
@@ -41,6 +40,7 @@ project(":api") {
     apply(plugin = "kotlin")
 
     dependencies {
+        runtimeOnly("com.h2database:h2")
         testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
         implementation(project(":core"))
     }
