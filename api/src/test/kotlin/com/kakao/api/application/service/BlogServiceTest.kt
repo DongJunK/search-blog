@@ -7,14 +7,18 @@ import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchMetaResponse
 import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
 import com.kakao.api.domain.blog.naver.client.NaverClient
 import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
+import com.kakao.api.domain.blog.popularKeyword.service.PopularKeywordDomainService
 import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException
 import com.kakao.core.error.exception.KakaoServerException
 import com.kakao.core.error.exception.NaverServerException
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import io.mockk.just
+import io.mockk.runs
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -31,14 +35,20 @@ class BlogServiceTest {
     @MockK(relaxed = true)
     private lateinit var naverClient: NaverClient
 
+    @MockK(relaxed = true)
+    private lateinit var popularKeywordDomainService: PopularKeywordDomainService
+
     private lateinit var blogService: BlogService
 
     @BeforeEach
     fun setup() {
         blogService = BlogService(
             kakaoClient = kakaoClient,
-            naverClient = naverClient
+            naverClient = naverClient,
+            popularKeywordDomainService = popularKeywordDomainService
         )
+
+        every { popularKeywordDomainService.increaseSearchCount(any()) } just runs
     }
 
     @Test
