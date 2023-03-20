@@ -2,7 +2,7 @@ package com.kakao.api.domain.blog.kakao.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class BlogSearchKakaoMetaResponse(
+data class KakaoBlogSearchMetaResponse(
     @JsonProperty("total_count")
     val totalCount: Int, // 검색된 문서 수
     @JsonProperty("pageable_count")

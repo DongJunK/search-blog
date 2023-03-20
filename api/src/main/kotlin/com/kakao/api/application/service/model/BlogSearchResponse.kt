@@ -1,7 +1,7 @@
 package com.kakao.api.application.service.model
 
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoResponse
-import com.kakao.api.domain.blog.naver.model.BlogSearchNaverResponse
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
+import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -11,7 +11,7 @@ data class BlogSearchResponse(
 ) {
     companion object {
         fun createBy(
-            response: BlogSearchKakaoResponse,
+            response: KakaoBlogSearchResponse,
         ): BlogSearchResponse {
             return BlogSearchResponse(
                 totalCount = response.meta.totalCount,
@@ -30,7 +30,7 @@ data class BlogSearchResponse(
             )
         }
 
-        fun createBy(response: BlogSearchNaverResponse): BlogSearchResponse {
+        fun createBy(response: NaverBlogSearchResponse): BlogSearchResponse {
             return BlogSearchResponse(
                 totalCount = response.total,
                 contents = response.items.map {
@@ -45,6 +45,13 @@ data class BlogSearchResponse(
                         ).toString()
                     )
                 }
+            )
+        }
+
+        fun empty(): BlogSearchResponse {
+            return BlogSearchResponse(
+                totalCount = 0,
+                contents = emptyList()
             )
         }
     }

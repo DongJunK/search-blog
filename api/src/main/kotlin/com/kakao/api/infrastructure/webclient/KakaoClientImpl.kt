@@ -1,15 +1,14 @@
 package com.kakao.api.infrastructure.webclient
 
 import com.kakao.api.domain.blog.kakao.client.KakaoClient
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoRequest
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoResponse
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
 import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException
 import com.kakao.core.error.exception.KakaoServerException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -18,22 +17,22 @@ class KakaoClientImpl(
     private val kakaoWebClient: WebClient,
 ) : KakaoClient {
 
-    override suspend fun searchBlog(blogSearchKakaoRequest: BlogSearchKakaoRequest): BlogSearchKakaoResponse {
+    override suspend fun searchBlog(kakaoBlogSearchRequest: KakaoBlogSearchRequest): KakaoBlogSearchResponse {
         return withContext(Dispatchers.IO) {
             kakaoWebClient.get()
                 .uri { uriBuilder ->
                     uriBuilder.path(SEARCH_BLOG_API_URL)
                         .queryParam(
                             "query",
-                            if (blogSearchKakaoRequest.blogUrl.isNullOrEmpty()) {
-                                blogSearchKakaoRequest.keyword
+                            if (kakaoBlogSearchRequest.blogUrl.isNullOrEmpty()) {
+                                kakaoBlogSearchRequest.keyword
                             } else {
-                                "${blogSearchKakaoRequest.blogUrl} ${blogSearchKakaoRequest.keyword}"
+                                "${kakaoBlogSearchRequest.blogUrl} ${kakaoBlogSearchRequest.keyword}"
                             }
                         )
-                        .queryParam("sort", blogSearchKakaoRequest.sortType.value)
-                        .queryParam("page", blogSearchKakaoRequest.page)
-                        .queryParam("size", blogSearchKakaoRequest.size)
+                        .queryParam("sort", kakaoBlogSearchRequest.sortType.value)
+                        .queryParam("page", kakaoBlogSearchRequest.page)
+                        .queryParam("size", kakaoBlogSearchRequest.size)
                         .build()
                 }
                 .retrieve()
@@ -43,9 +42,9 @@ class KakaoClientImpl(
                 .onStatus({ status -> status.is5xxServerError }) {
                     throw KakaoServerException(ServerErrorCode.INTERNAL_SERVER_ERROR)
                 }
-                .bodyToMono(BlogSearchKakaoResponse::class.java)
+                .bodyToMono(KakaoBlogSearchResponse::class.java)
                 .block()
-                ?: BlogSearchKakaoResponse.empty()
+                ?: KakaoBlogSearchResponse.empty()
         }
 
     }

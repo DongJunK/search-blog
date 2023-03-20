@@ -2,7 +2,7 @@ package com.kakao.api.domain.blog.kakao.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class BlogSearchKakaoDocumentResponse(
+data class KakaoBlogSearchDocumentResponse(
     val title: String, // 블로그 글 제목
     val contents: String, // 블로그 글 요약
     @JsonProperty("url")

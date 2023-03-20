@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "3.0.4"
@@ -19,13 +18,16 @@ subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        //kotlin
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-        implementation("org.springframework.boot:spring-boot-devtools")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("io.projectreactor:reactor-test")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+        }
+        testImplementation("io.mockk:mockk:1.9.3")
     }
 
     tasks.withType<KotlinCompile> {
@@ -41,7 +43,6 @@ project(":api") {
 
     dependencies {
         runtimeOnly("com.h2database:h2")
-        testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
         implementation(project(":core"))
     }
 

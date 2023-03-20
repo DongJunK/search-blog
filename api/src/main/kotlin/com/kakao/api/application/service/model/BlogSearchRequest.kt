@@ -2,9 +2,9 @@ package com.kakao.api.application.service.model
 
 import com.kakao.api.application.service.enum.BlogSearchSortType
 import com.kakao.api.domain.blog.kakao.enum.BlogSearchKakaoSortType
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoRequest
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest
 import com.kakao.api.domain.blog.naver.enum.BlogSearchNaverSortType
-import com.kakao.api.domain.blog.naver.model.BlogSearchNaverRequest
+import com.kakao.api.domain.blog.naver.model.NaverBlogSearchRequest
 
 data class BlogSearchRequest(
     val blogUrl: String? = null,
@@ -13,8 +13,8 @@ data class BlogSearchRequest(
     val page: Int = 1,
     val size: Int = 10,
 ) {
-    fun toKakaoRequest(): BlogSearchKakaoRequest {
-        return BlogSearchKakaoRequest(
+    fun toKakaoRequest(): KakaoBlogSearchRequest {
+        return KakaoBlogSearchRequest(
             blogUrl = blogUrl,
             keyword = keyword,
             sortType = when (sortType) {
@@ -26,8 +26,8 @@ data class BlogSearchRequest(
         )
     }
 
-    fun toNaverRequest(): BlogSearchNaverRequest {
-        return BlogSearchNaverRequest(
+    fun toNaverRequest(): NaverBlogSearchRequest {
+        return NaverBlogSearchRequest(
             keyword = keyword,
             sortType = when (sortType) {
                 BlogSearchSortType.ACCURACY -> BlogSearchNaverSortType.SIM

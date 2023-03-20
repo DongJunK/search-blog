@@ -1,8 +1,8 @@
 package com.kakao.api.domain.blog.naver.client
 
-import com.kakao.api.domain.blog.naver.model.BlogSearchNaverRequest
-import com.kakao.api.domain.blog.naver.model.BlogSearchNaverResponse
+import com.kakao.api.domain.blog.naver.model.NaverBlogSearchRequest
+import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
 
 interface NaverClient {
-    suspend fun searchBlog(blogSearchNaverRequest: BlogSearchNaverRequest): BlogSearchNaverResponse
+    suspend fun searchBlog(naverBlogSearchRequest: NaverBlogSearchRequest): NaverBlogSearchResponse
 }

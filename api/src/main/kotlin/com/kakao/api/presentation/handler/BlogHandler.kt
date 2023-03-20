@@ -11,10 +11,9 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyValueAndAwait
 
 @Component
-class BlogSearchHandler(
+class BlogHandler(
     private val blogSearchService: BlogSearchService,
 ) {
-
     suspend fun searchBlog(serverRequest: ServerRequest): ServerResponse {
         val request = serverRequest.bodyToMono(BlogSearchRequest::class.java).awaitSingle()
         return withContext(Dispatchers.Default) {

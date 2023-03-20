@@ -1,9 +1,9 @@
 package com.kakao.api.domain.blog.kakao.client
 
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoRequest
-import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoResponse
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest
+import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
 
 
 interface KakaoClient {
-    suspend fun searchBlog(blogSearchKakaoRequest: BlogSearchKakaoRequest): BlogSearchKakaoResponse
+    suspend fun searchBlog(kakaoBlogSearchRequest: KakaoBlogSearchRequest): KakaoBlogSearchResponse
 }

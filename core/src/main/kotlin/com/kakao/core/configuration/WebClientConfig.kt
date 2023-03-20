@@ -1,7 +1,6 @@
 package com.kakao.core.configuration
 
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.kakao.core.configuration.properties.KakaoProperties
 import com.kakao.core.configuration.properties.NaverProperties
 import com.kakao.core.constant.KakaoConstants
@@ -11,12 +10,8 @@ import io.netty.handler.timeout.ReadTimeoutHandler
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpHeaders.ACCEPT
 import org.springframework.http.HttpHeaders.AUTHORIZATION
-import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
-import org.springframework.http.codec.json.Jackson2JsonDecoder
-import org.springframework.http.codec.json.Jackson2JsonEncoder
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.netty.http.client.HttpClient
@@ -29,7 +24,6 @@ import java.util.concurrent.TimeUnit
 class WebClientConfig(
     private val kakaoProperties: KakaoProperties,
     private val naverProperties: NaverProperties,
-    private val objectMapper: ObjectMapper,
 ) {
 
     fun defaultWebClient(): WebClient {

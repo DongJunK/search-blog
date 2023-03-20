@@ -1,9 +1,8 @@
 package com.kakao.api.domain.blog.naver.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.time.LocalDateTime
 
-data class BlogSearchNaverItemResponse(
+data class NaverBlogSearchItemResponse(
     val title: String, // 블로그 포스트의 제목
     @JsonProperty("link")
     val blogPostUrl: String, // 블로그 포스트의 URL
