@@ -1,6 +1,6 @@
 package com.kakao.api.presentation
 
-import com.kakao.api.application.service.BlogSearchService
+import com.kakao.api.application.service.BlogService
 import com.kakao.api.application.service.model.BlogSearchResponse
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -20,7 +20,7 @@ class BlogRouterTest(
     private val context: ApplicationContext,
 ) {
     @MockK(relaxed = true)
-    private lateinit var blogSearchService: BlogSearchService
+    private lateinit var blogService: BlogService
 
     private lateinit var webTestClient: WebTestClient
 
@@ -31,7 +31,7 @@ class BlogRouterTest(
 
     @Test
     fun searchBlog() {
-        coEvery { blogSearchService.searchBlog(any()) } returns BlogSearchResponse.empty()
+        coEvery { blogService.searchBlog(any()) } returns BlogSearchResponse.empty()
 
         webTestClient.get()
             .uri("/v1/blog/search")

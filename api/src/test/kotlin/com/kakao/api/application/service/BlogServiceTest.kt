@@ -24,18 +24,18 @@ import org.junit.jupiter.api.extension.ExtendWith
 import java.time.LocalDate
 
 @ExtendWith(MockKExtension::class)
-class BlogSearchServiceTest {
+class BlogServiceTest {
     @MockK(relaxed = true)
     private lateinit var kakaoClient: KakaoClient
 
     @MockK(relaxed = true)
     private lateinit var naverClient: NaverClient
 
-    private lateinit var blogSearchService: BlogSearchService
+    private lateinit var blogService: BlogService
 
     @BeforeEach
     fun setup() {
-        blogSearchService = BlogSearchService(
+        blogService = BlogService(
             kakaoClient = kakaoClient,
             naverClient = naverClient
         )
@@ -55,7 +55,7 @@ class BlogSearchServiceTest {
         coEvery { kakaoClient.searchBlog(any()) } returns kakaoBlogSearchResponse
 
         val response = runBlocking {
-            blogSearchService.searchBlog(blogSearchRequest)
+            blogService.searchBlog(blogSearchRequest)
         }
         assertEquals(BlogSearchResponse.empty(), response)
     }
@@ -68,7 +68,7 @@ class BlogSearchServiceTest {
 
         assertThrows<ClientException> {
             runBlocking {
-                blogSearchService.searchBlog(blogSearchRequest)
+                blogService.searchBlog(blogSearchRequest)
             }
         }
     }
@@ -88,7 +88,7 @@ class BlogSearchServiceTest {
         coEvery { naverClient.searchBlog(any()) } returns naverBlogSearchResponse
 
         val response = runBlocking {
-            blogSearchService.searchBlog(blogSearchRequest)
+            blogService.searchBlog(blogSearchRequest)
         }
 
         assertEquals(BlogSearchResponse.empty(), response)
@@ -103,7 +103,7 @@ class BlogSearchServiceTest {
 
         assertThrows<NaverServerException> {
             runBlocking {
-                blogSearchService.searchBlog(blogSearchRequest)
+                blogService.searchBlog(blogSearchRequest)
             }
         }
     }

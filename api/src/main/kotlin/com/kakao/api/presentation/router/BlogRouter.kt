@@ -16,6 +16,7 @@ class BlogRouter(
     fun routeBlog(): RouterFunction<ServerResponse> = coRouter {
         (accept(MediaType.APPLICATION_JSON) and "/v1/blog").nest {
             GET("/search", blogHandler::searchBlog)
+            GET("/popular-keyword", blogHandler::getPopularKeywords)
         }
     }
 }

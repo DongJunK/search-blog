@@ -1,6 +1,6 @@
 package com.kakao.api.presentation.handler
 
-import com.kakao.api.application.service.BlogSearchService
+import com.kakao.api.application.service.BlogService
 import com.kakao.api.application.service.model.BlogSearchRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.reactor.awaitSingle
@@ -12,13 +12,21 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 
 @Component
 class BlogHandler(
-    private val blogSearchService: BlogSearchService,
+    private val blogService: BlogService,
 ) {
     suspend fun searchBlog(serverRequest: ServerRequest): ServerResponse {
         val request = serverRequest.bodyToMono(BlogSearchRequest::class.java).awaitSingle()
         return withContext(Dispatchers.Default) {
             ServerResponse.ok().bodyValueAndAwait(
-                blogSearchService.searchBlog(request)
+                blogService.searchBlog(request)
+            )
+        }
+    }
+
+    suspend fun getPopularKeywords(serverRequest: ServerRequest): ServerResponse {
+        return withContext(Dispatchers.Default) {
+            ServerResponse.ok().bodyValueAndAwait(
+                blogService.getPopularKeywords()
             )
         }
     }

@@ -14,6 +14,9 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories {
     mavenCentral()
 }
+dependencies {
+    runtimeOnly("com.h2database:h2:1.4.200")
+}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

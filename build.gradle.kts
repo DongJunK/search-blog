@@ -42,7 +42,6 @@ project(":api") {
     apply(plugin = "kotlin")
 
     dependencies {
-        runtimeOnly("com.h2database:h2")
         implementation(project(":core"))
     }
 
