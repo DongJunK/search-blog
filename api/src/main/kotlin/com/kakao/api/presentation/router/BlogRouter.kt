@@ -9,15 +9,13 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.coRouter
 
 @Configuration
-class BlogSearchRouter(
+class BlogRouter(
     private val blogSearchHandler: BlogSearchHandler,
 ) {
     @Bean
-    fun searchBlogRouter(): RouterFunction<ServerResponse> = coRouter {
-        (accept(MediaType.APPLICATION_JSON) and "/v1").nest {
-            "/blog".nest {
-                GET("/search", blogSearchHandler::searchBlog)
-            }
+    fun routeBlog(): RouterFunction<ServerResponse> = coRouter {
+        (accept(MediaType.APPLICATION_JSON) and "/v1/blog").nest {
+            GET("/search", blogSearchHandler::searchBlog)
         }
     }
 }

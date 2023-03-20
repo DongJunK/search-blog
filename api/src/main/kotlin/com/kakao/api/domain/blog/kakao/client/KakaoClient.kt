@@ -5,5 +5,5 @@ import com.kakao.api.domain.blog.kakao.model.BlogSearchKakaoResponse
 
 
 interface KakaoClient {
-    fun searchBlog(blogSearchKakaoRequest: BlogSearchKakaoRequest): BlogSearchKakaoResponse
+    suspend fun searchBlog(blogSearchKakaoRequest: BlogSearchKakaoRequest): BlogSearchKakaoResponse
 }

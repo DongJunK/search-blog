@@ -5,7 +5,7 @@ import com.kakao.api.domain.blog.kakao.enum.BlogSearchKakaoSortType
 data class BlogSearchKakaoRequest(
     val blogUrl: String? = null,
     val keyword: String,
-    val sortType: BlogSearchKakaoSortType,
+    val sortType: BlogSearchKakaoSortType = BlogSearchKakaoSortType.ACCURACY,
     val page: Int = 1,
     val size: Int = 10,
 )

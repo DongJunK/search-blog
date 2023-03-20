@@ -2,6 +2,7 @@ package com.kakao.core.error
 
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException
+import com.kakao.core.error.exception.NaverServerException
 import com.kakao.core.error.exception.ServerException
 import org.slf4j.LoggerFactory
 import org.springframework.boot.web.error.ErrorAttributeOptions
@@ -22,7 +23,8 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
         val errorAttributeResponse = when (error) {
             is ServerException -> handleServerException(error)
             is ClientException -> handleClientException(error)
-            else -> handleUnknownException()
+            is NaverServerException -> handleNaverServerException(error)
+            else -> handleUnknownException(error)
         }
 
         return mutableMapOf(
@@ -47,10 +49,24 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
         )
     }
 
-    fun handleUnknownException() = ErrorAttributeResponse(
-        status = ServerErrorCode.INTERNAL_SERVER_ERROR.status,
-        message = ServerErrorCode.INTERNAL_SERVER_ERROR.getMessage()
-    )
+    fun handleNaverServerException(ex: NaverServerException): ErrorAttributeResponse {
+        log.error("NAVER SERVER EXCEPTION")
+        log.error(getStackTrace(ex))
+
+        return ErrorAttributeResponse(
+            status = ex.errorCode.status,
+            message = ex.errorCode.getMessage()
+        )
+    }
+
+    fun handleUnknownException(ex: Throwable): ErrorAttributeResponse {
+        log.error(getStackTrace(ex))
+
+        return ErrorAttributeResponse(
+            status = ServerErrorCode.INTERNAL_SERVER_ERROR.status,
+            message = ServerErrorCode.INTERNAL_SERVER_ERROR.getMessage()
+        )
+    }
 
     private fun getStackTrace(error: Throwable?): String? {
         return error?.let {
