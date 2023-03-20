@@ -17,7 +17,6 @@ import org.springframework.web.reactive.function.client.WebClient
 class KakaoClientImpl(
     private val kakaoWebClient: WebClient,
 ) : KakaoClient {
-    private val log = LoggerFactory.getLogger(javaClass)
 
     override suspend fun searchBlog(blogSearchKakaoRequest: BlogSearchKakaoRequest): BlogSearchKakaoResponse {
         return withContext(Dispatchers.IO) {
