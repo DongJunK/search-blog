@@ -20,7 +20,6 @@ import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 @Configuration
-@ConfigurationPropertiesScan
 class WebClientConfig(
     private val kakaoProperties: KakaoProperties,
     private val naverProperties: NaverProperties,

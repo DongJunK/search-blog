@@ -2,8 +2,8 @@ package com.kakao.api.presentation.handler
 
 import com.kakao.api.application.service.BlogService
 import com.kakao.api.application.service.model.BlogSearchRequest
+import com.kakao.core.extension.queryParamsToModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.withContext
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
@@ -15,7 +15,7 @@ class BlogHandler(
     private val blogService: BlogService,
 ) {
     suspend fun searchBlog(serverRequest: ServerRequest): ServerResponse {
-        val request = serverRequest.bodyToMono(BlogSearchRequest::class.java).awaitSingle()
+        val request = serverRequest.queryParamsToModel<BlogSearchRequest>()
         return withContext(Dispatchers.Default) {
             ServerResponse.ok().bodyValueAndAwait(
                 blogService.searchBlog(request)

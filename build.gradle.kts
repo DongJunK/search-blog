@@ -42,6 +42,8 @@ project(":api") {
     apply(plugin = "kotlin")
 
     dependencies {
+        implementation("com.h2database:h2")
+        testImplementation("com.ninja-squad:springmockk:3.1.1")
         implementation(project(":core"))
     }
 

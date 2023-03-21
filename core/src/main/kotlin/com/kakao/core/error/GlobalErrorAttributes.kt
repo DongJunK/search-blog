@@ -35,10 +35,14 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
         )
     }
 
-    fun handleClientException(ex: ClientException) = ErrorAttributeResponse(
-        status = ex.errorCode.status,
-        message = ex.errorCode.getMessage()
-    )
+    fun handleClientException(ex: ClientException): ErrorAttributeResponse{
+        log.info(getStackTrace(ex))
+
+        return ErrorAttributeResponse(
+            status = ex.errorCode.status,
+            message = ex.errorCode.getMessage()
+        )
+    }
 
     fun handleServerException(ex: ServerException): ErrorAttributeResponse {
         log.error(getStackTrace(ex))
@@ -50,8 +54,7 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
     }
 
     fun handleNaverServerException(ex: NaverServerException): ErrorAttributeResponse {
-        log.error("NAVER SERVER EXCEPTION")
-        log.error(getStackTrace(ex))
+        log.error("[NAVER SERVER EXCEPTION] ${getStackTrace(ex)}")
 
         return ErrorAttributeResponse(
             status = ex.errorCode.status,
