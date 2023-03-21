@@ -1,5 +1,11 @@
+# 제출
+jar 파일 용량이 업로드 제한을 초과해서 링크 공유드립니다.
+
+jar 파일 URL: https://drive.google.com/file/d/1DL1sIhbRVcZDb_jTEQcY-BmQ9xUEjeM1/view?usp=share_link
+
 # Local에서 bootRun하는 방법
 bootRun하기 전에 `api/main/resources` 경로에 application.yml 파일을 작성해야 합니다.
+
 ### application.yml
 ```yaml
 # H2 설정
