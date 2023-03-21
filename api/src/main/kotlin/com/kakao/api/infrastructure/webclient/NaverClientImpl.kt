@@ -1,9 +1,9 @@
 package com.kakao.api.infrastructure.webclient
 
-import com.kakao.api.domain.blog.naver.client.NaverClient
+import com.kakao.api.domain.naver.client.NaverClient
 import com.kakao.core.error.exception.NaverServerException
-import com.kakao.api.domain.blog.naver.model.NaverBlogSearchRequest
-import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
+import com.kakao.api.domain.naver.model.NaverBlogSearchRequest
+import com.kakao.api.domain.naver.model.NaverBlogSearchResponse
 import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException

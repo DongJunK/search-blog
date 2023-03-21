@@ -1,4 +1,4 @@
-package com.kakao.api.domain.blog.kakao.model
+package com.kakao.api.domain.kakao.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

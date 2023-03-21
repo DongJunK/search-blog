@@ -1,6 +1,6 @@
-package com.kakao.api.domain.blog.popularKeyword.service.model
+package com.kakao.api.domain.popularKeyword.service.model
 
-import com.kakao.api.domain.blog.popularKeyword.entity.PopularKeyword
+import com.kakao.api.domain.popularKeyword.entity.PopularKeyword
 
 data class PopularKeywordDomainResponse(
     val keyword: String,

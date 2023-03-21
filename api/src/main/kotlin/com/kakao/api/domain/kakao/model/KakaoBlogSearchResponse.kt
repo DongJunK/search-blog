@@ -1,4 +1,4 @@
-package com.kakao.api.domain.blog.kakao.model
+package com.kakao.api.domain.kakao.model
 
 data class KakaoBlogSearchResponse(
     val meta: KakaoBlogSearchMetaResponse,

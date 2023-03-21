@@ -1,7 +1,8 @@
 package com.kakao.api.presentation
 
-import com.kakao.api.application.service.BlogSearchService
+import com.kakao.api.application.service.BlogService
 import com.kakao.api.application.service.model.BlogSearchResponse
+import com.kakao.api.application.service.model.PopularKeywordResponse
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.coEvery
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -20,7 +21,7 @@ class BlogRouterTest(
     private val context: ApplicationContext,
 ) {
     @MockkBean
-    private lateinit var blogSearchService: BlogSearchService
+    private lateinit var blogService: BlogService
 
     private lateinit var webTestClient: WebTestClient
 
@@ -31,7 +32,7 @@ class BlogRouterTest(
 
     @Test
     fun searchBlog() {
-        coEvery { blogSearchService.searchBlog(any()) } returns BlogSearchResponse.empty()
+        coEvery { blogService.searchBlog(any()) } returns BlogSearchResponse.empty()
 
         webTestClient.get()
             .uri("/v1/blog/search?keyword=test&page=5&size=100&sortType=RECENCY&blogUrl=https://www.test.com")
@@ -41,6 +42,24 @@ class BlogRouterTest(
             .expectBody(BlogSearchResponse::class.java)
             .value {
                 assertEquals(it, BlogSearchResponse.empty())
+            }
+    }
+
+    @Test
+    fun getPopularKeywordsTest() {
+        coEvery { blogService.getPopularKeywords() } returns PopularKeywordResponse(
+            totalCount = 0,
+            popularKeywords = emptyList()
+        )
+
+        webTestClient.get()
+            .uri("/v1/blog/popular-keyword")
+            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+            .exchange()
+            .expectStatus().isOk
+            .expectBody(PopularKeywordResponse::class.java)
+            .value {
+                assertEquals(it.totalCount, 0)
             }
     }
 }

@@ -19,7 +19,7 @@ inline fun <reified T : Any> ServerRequest.queryParamsToModel(): T {
     return try {
         objectMapper.readValue(objectMapper.writeValueAsString(requestMap), T::class.java)
     } catch (e: Exception){
-        throw ClientException(ClientErrorCode.REQUEST_CONVERT_ERROR)
+        throw ClientException(ClientErrorCode.REQUEST_VALUE_ERROR)
     }
 
 }

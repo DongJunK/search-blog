@@ -1,11 +1,12 @@
 package com.kakao.api.application.service.model
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.kakao.api.application.service.enum.BlogSearchSortType
-import com.kakao.api.domain.blog.kakao.enum.BlogSearchKakaoSortType
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest
-import com.kakao.api.domain.blog.naver.enum.BlogSearchNaverSortType
-import com.kakao.api.domain.blog.naver.model.NaverBlogSearchRequest
+import com.kakao.api.domain.kakao.enum.BlogSearchKakaoSortType
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchRequest
+import com.kakao.api.domain.naver.enum.BlogSearchNaverSortType
+import com.kakao.api.domain.naver.model.NaverBlogSearchRequest
+import com.kakao.core.error.errorcode.ClientErrorCode
+import com.kakao.core.error.exception.ClientException
 
 data class BlogSearchRequest(
     val blogUrl: String? = null,
@@ -14,6 +15,16 @@ data class BlogSearchRequest(
     val page: Int = 1,
     val size: Int = 10,
 ) {
+    fun validate() {
+        if (page < 1 || page > 50) {
+            throw ClientException(ClientErrorCode.REQUEST_VALUE_ERROR)
+        }
+
+        if (size < 1 || size > 50) {
+            throw ClientException(ClientErrorCode.REQUEST_VALUE_ERROR)
+        }
+    }
+
     fun toKakaoRequest(): KakaoBlogSearchRequest {
         return KakaoBlogSearchRequest(
             blogUrl = blogUrl,

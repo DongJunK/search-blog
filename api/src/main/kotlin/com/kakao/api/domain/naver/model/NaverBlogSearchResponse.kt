@@ -1,4 +1,4 @@
-package com.kakao.api.domain.blog.naver.model
+package com.kakao.api.domain.naver.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime

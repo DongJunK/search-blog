@@ -1,8 +1,8 @@
 package com.kakao.api.infrastructure.webclient
 
-import com.kakao.api.domain.blog.kakao.client.KakaoClient
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
+import com.kakao.api.domain.kakao.client.KakaoClient
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchRequest
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchResponse
 import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException

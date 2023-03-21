@@ -1,4 +1,4 @@
-package com.kakao.api.domain.blog.kakao.enum
+package com.kakao.api.domain.kakao.enum
 
 enum class BlogSearchKakaoSortType(val value: String) {
     ACCURACY("accuracy"),

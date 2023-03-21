@@ -1,7 +1,7 @@
 package com.kakao.api.application.service.model
 
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
-import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchResponse
+import com.kakao.api.domain.naver.model.NaverBlogSearchResponse
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

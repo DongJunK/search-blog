@@ -2,12 +2,12 @@ package com.kakao.api.application.service
 
 import com.kakao.api.application.service.model.BlogSearchRequest
 import com.kakao.api.application.service.model.BlogSearchResponse
-import com.kakao.api.domain.blog.kakao.client.KakaoClient
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchMetaResponse
-import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchResponse
-import com.kakao.api.domain.blog.naver.client.NaverClient
-import com.kakao.api.domain.blog.naver.model.NaverBlogSearchResponse
-import com.kakao.api.domain.blog.popularKeyword.service.PopularKeywordDomainService
+import com.kakao.api.domain.kakao.client.KakaoClient
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchMetaResponse
+import com.kakao.api.domain.kakao.model.KakaoBlogSearchResponse
+import com.kakao.api.domain.naver.client.NaverClient
+import com.kakao.api.domain.naver.model.NaverBlogSearchResponse
+import com.kakao.api.domain.popularKeyword.service.PopularKeywordDomainService
 import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException

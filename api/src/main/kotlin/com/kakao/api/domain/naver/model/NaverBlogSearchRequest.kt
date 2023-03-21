@@ -1,6 +1,6 @@
-package com.kakao.api.domain.blog.naver.model
+package com.kakao.api.domain.naver.model
 
-import com.kakao.api.domain.blog.naver.enum.BlogSearchNaverSortType
+import com.kakao.api.domain.naver.enum.BlogSearchNaverSortType
 
 data class NaverBlogSearchRequest(
     val keyword: String,

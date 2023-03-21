@@ -1,5 +1,6 @@
 package com.kakao.core.error
 
+import com.kakao.core.error.errorcode.ClientErrorCode
 import com.kakao.core.error.errorcode.ServerErrorCode
 import com.kakao.core.error.exception.ClientException
 import com.kakao.core.error.exception.NaverServerException
@@ -10,6 +11,7 @@ import org.springframework.boot.web.reactive.error.DefaultErrorAttributes
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.server.ResponseStatusException
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.time.LocalDateTime
@@ -24,6 +26,7 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
             is ServerException -> handleServerException(error)
             is ClientException -> handleClientException(error)
             is NaverServerException -> handleNaverServerException(error)
+            is ResponseStatusException -> handleResponseStatusException(error)
             else -> handleUnknownException(error)
         }
 
@@ -35,13 +38,27 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
         )
     }
 
-    fun handleClientException(ex: ClientException): ErrorAttributeResponse{
+    fun handleClientException(ex: ClientException): ErrorAttributeResponse {
         log.info(getStackTrace(ex))
 
         return ErrorAttributeResponse(
             status = ex.errorCode.status,
             message = ex.errorCode.getMessage()
         )
+    }
+
+    fun handleResponseStatusException(ex: ResponseStatusException): ErrorAttributeResponse {
+        return if (ex.statusCode.isSameCodeAs(HttpStatus.NOT_FOUND)) {
+            ErrorAttributeResponse(
+                status = HttpStatus.NOT_FOUND,
+                message = ClientErrorCode.NOT_FOUND_ERROR.getMessage()
+            )
+        } else {
+            ErrorAttributeResponse(
+                status = HttpStatus.BAD_REQUEST,
+                message = ClientErrorCode.REQUEST_ERROR.getMessage()
+            )
+        }
     }
 
     fun handleServerException(ex: ServerException): ErrorAttributeResponse {

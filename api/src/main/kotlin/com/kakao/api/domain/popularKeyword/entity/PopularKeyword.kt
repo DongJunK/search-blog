@@ -1,4 +1,4 @@
-package com.kakao.api.domain.blog.popularKeyword.entity
+package com.kakao.api.domain.popularKeyword.entity
 
 import jakarta.persistence.*
 

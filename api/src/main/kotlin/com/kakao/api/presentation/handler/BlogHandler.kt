@@ -15,7 +15,10 @@ class BlogHandler(
     private val blogService: BlogService,
 ) {
     suspend fun searchBlog(serverRequest: ServerRequest): ServerResponse {
-        val request = serverRequest.queryParamsToModel<BlogSearchRequest>()
+        val request = serverRequest.queryParamsToModel<BlogSearchRequest>().also {
+            it.validate()
+        }
+
         return withContext(Dispatchers.Default) {
             ServerResponse.ok().bodyValueAndAwait(
                 blogService.searchBlog(request)

@@ -1,6 +1,6 @@
-package com.kakao.api.domain.blog.kakao.model
+package com.kakao.api.domain.kakao.model
 
-import com.kakao.api.domain.blog.kakao.enum.BlogSearchKakaoSortType
+import com.kakao.api.domain.kakao.enum.BlogSearchKakaoSortType
 
 data class KakaoBlogSearchRequest(
     val blogUrl: String? = null,
