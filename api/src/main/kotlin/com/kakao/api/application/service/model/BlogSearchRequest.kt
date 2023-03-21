@@ -1,5 +1,6 @@
 package com.kakao.api.application.service.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.kakao.api.application.service.enum.BlogSearchSortType
 import com.kakao.api.domain.blog.kakao.enum.BlogSearchKakaoSortType
 import com.kakao.api.domain.blog.kakao.model.KakaoBlogSearchRequest

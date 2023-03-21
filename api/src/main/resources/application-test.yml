@@ -1,0 +1,6 @@
+kakao:
+  rest-api-key: testRestApiKey
+
+naver:
+  client-id: testClientId
+  client-secret: testClientSecret

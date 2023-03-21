@@ -7,7 +7,7 @@ enum class ServerErrorCode(
     val status: HttpStatus,
     val code: String,
 ) : ErrorCode {
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E0003"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "ES0001"),
     ;
 
     override fun getMessage() = MessageConverter.getMessage("error.properties.$code")
