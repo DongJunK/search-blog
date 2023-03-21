@@ -3,6 +3,7 @@ package com.kakao.api.presentation
 import com.kakao.api.application.service.BlogService
 import com.kakao.api.application.service.model.BlogSearchResponse
 import com.kakao.api.application.service.model.PopularKeywordResponse
+import com.kakao.api.domain.popularKeyword.repository.PopularKeywordRepository
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.coEvery
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -23,6 +24,9 @@ class BlogRouterTest(
     @MockkBean
     private lateinit var blogService: BlogService
 
+    @MockkBean
+    private lateinit var popularKeywordRepository: PopularKeywordRepository
+
     private lateinit var webTestClient: WebTestClient
 
     @BeforeEach
@@ -35,7 +39,7 @@ class BlogRouterTest(
         coEvery { blogService.searchBlog(any()) } returns BlogSearchResponse.empty()
 
         webTestClient.get()
-            .uri("/v1/blog/search?keyword=test&page=5&size=100&sortType=RECENCY&blogUrl=https://www.test.com")
+            .uri("/v1/blog/search?keyword=test&page=5&size=80&sortType=RECENCY&blogUrl=https://www.test.com")
             .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
             .exchange()
             .expectStatus().isOk

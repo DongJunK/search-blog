@@ -13,14 +13,14 @@ data class BlogSearchRequest(
     val keyword: String,
     val sortType: BlogSearchSortType = BlogSearchSortType.ACCURACY,
     val page: Int = 1,
-    val size: Int = 10,
+    val size: Int = 30,
 ) {
     fun validate() {
         if (page < 1 || page > 50) {
             throw ClientException(ClientErrorCode.REQUEST_VALUE_ERROR)
         }
 
-        if (size < 1 || size > 50) {
+        if (size < 1 || size > 80) {
             throw ClientException(ClientErrorCode.REQUEST_VALUE_ERROR)
         }
     }

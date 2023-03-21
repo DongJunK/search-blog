@@ -8,8 +8,8 @@ enum class ClientErrorCode(
     val code: String,
 ) : ErrorCode {
     REQUEST_ERROR(HttpStatus.BAD_REQUEST, "EC0001"),
-    NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "EC0002"),
-    REQUEST_VALUE_ERROR(HttpStatus.BAD_REQUEST, "EC0003"),
+    REQUEST_VALUE_ERROR(HttpStatus.BAD_REQUEST, "EC0002"),
+    NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "EC0003"),
     ;
 
     override fun getMessage() = MessageConverter.getMessage("error.properties.$code")
