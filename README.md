@@ -21,7 +21,7 @@ naver:
   client-secret: naver 어플리케이션 client secret 기입
 
 kakao:
-  rest-api-key: kakao 어플리케이션 client secret 기입
+  rest-api-key: kakao 어플리케이션 rest-api-key 기입
 ```
 
 # 과제 기능 요구사항 수행 여부
