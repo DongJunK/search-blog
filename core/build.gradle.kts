@@ -1,7 +1,6 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("org.springframework.boot") version "3.0.4"
+    kotlin("kapt")
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
@@ -24,9 +23,8 @@ tasks.jar {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<Test> {
